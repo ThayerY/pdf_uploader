@@ -1,0 +1,114 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+input[type="file"] {
+  display: block;
+  margin: 20px 0;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.status {
+  margin-top: 15px;
+  color: green;
+  text-align: center;
+}
+
+/* Style for the file list */
+#fileList {
+  margin-top: 20px;
+}
+
+#fileList h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+#files {
+  list-style-type: none;
+  padding: 0;
+}
+
+#files li {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Download button styling */
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: #003f7f;
+  transform: scale(1);
+}
+
+/* Delete button styling */
+button.delete {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.delete:hover {
+  background-color: #b52a38;
+  transform: scale(1.05);
+}
+
+button.delete:active {
+  background-color: #921f2b;
+  transform: scale(1);
+}

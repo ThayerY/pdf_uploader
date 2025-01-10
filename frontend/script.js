@@ -1,8 +1,12 @@
+
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const fileInput = document.getElementById('fileInput');
   const file = fileInput.files[0];
+
+  const statusElement = document.getElementById('status');
+  statusElement.textContent = ''; // Clear the previous status message
 
   if (!file) {
     alert('Please select a file');
@@ -19,13 +23,25 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     });
 
     const result = await response.json();
-    document.getElementById('status').textContent = result.message;
+
+    if (response.ok) {
+      statusElement.textContent = result.message;
+      statusElement.style.color = 'green';
+      fetchFiles(); // Refresh file list after a successful upload
+    } else {
+      throw new Error(result.message);
+    }
   } catch (err) {
     console.error(err);
-    document.getElementById('status').textContent = 'Upload failed!';
+    statusElement.textContent = 'Upload failed!';
+    statusElement.style.color = 'red';
   }
 });
 
+
+
+
+// fetching files
 async function fetchFiles() {
   try {
     const response = await fetch('http://localhost:5000/files');
@@ -36,10 +52,13 @@ async function fetchFiles() {
 
     files.forEach(file => {
       const listItem = document.createElement('li');
+      // In your fetchFiles function, update the listItem.innerHTML to:
       listItem.innerHTML = `
-        ${file.filename} 
-        <button onclick="downloadFile('${file.filename}')">Download</button>
-        <button class="delete" onclick="deleteFile('${file._id}')">Delete</button>
+        <span>${file.filename}</span>
+         <div class="buttons">
+            <input type="button" value="Download" onclick="downloadFile('${file.filename}')" class="download">
+            <input type="button" value="Delete" onclick="deleteFile('${file._id}')" class="delete">
+         </div>
       `;
       filesList.appendChild(listItem);
     });
@@ -48,6 +67,7 @@ async function fetchFiles() {
   }
 }
 
+// Delete file
 async function deleteFile(fileId) {
   try {
     const response = await fetch(`http://localhost:5000/delete/${fileId}`, {
@@ -67,7 +87,7 @@ async function deleteFile(fileId) {
   }
 }
 
-
+// Download file
 async function downloadFile(filename) {
   try {
     const response = await fetch(`http://localhost:5000/download/${filename}`);
@@ -90,3 +110,18 @@ async function downloadFile(filename) {
 
 // Fetch files on page load
 fetchFiles();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
